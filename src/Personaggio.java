@@ -1,6 +1,9 @@
 
     public interface Personaggio
     {
-        public String getForza();
+        String getForza();
+        int getVita();
+        void attacca(Personaggio p);
+
     }
 
