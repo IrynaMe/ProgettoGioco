@@ -13,9 +13,7 @@ public class Eroe implements Umano {
         } else{
             System.out.println("Non posso attacare");
         }
-        // forza = forza - 2;
     }
-
 
     public String getForza() {
         return "Forza rimanente come eroe:" + forza;
@@ -29,4 +27,5 @@ public class Eroe implements Umano {
     @Override
     public void attacca(Personaggio p) {
     }
-}
+
+}//

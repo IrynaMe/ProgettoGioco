@@ -2,17 +2,17 @@ public class Licantropo implements Mostro, Umano {
     private boolean isUomo;
     protected int forzaUmano, forzaMostro;
     protected int vita;
-    public Licantropo(boolean luna) {
 
+    public Licantropo(boolean luna) {
         isUomo = !luna;
         if (luna) {
             forzaMostro = 15;
             forzaUmano = 0;
-            vita=70;
+            vita = 70;
         } else {
             forzaUmano = 10;
             forzaMostro = 0;
-            vita=40;
+            vita = 100;
         }
 
     }
@@ -20,7 +20,7 @@ public class Licantropo implements Mostro, Umano {
     public String getForza() {
         return
                 "Forza rimanente come umano:" + forzaUmano +
-                 "Forza rimanente come mostro" + forzaMostro;
+                        "Forza rimanente come mostro" + forzaMostro;
     }
 
     @Override
@@ -30,7 +30,11 @@ public class Licantropo implements Mostro, Umano {
 
     @Override
     public void attacca(Personaggio p) {
-
+        if (isUomo) {
+           combatti();
+        } else {
+            azzanna();
+        }
     }
 
     public void azzanna() {
