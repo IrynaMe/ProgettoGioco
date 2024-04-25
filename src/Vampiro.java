@@ -21,11 +21,6 @@ public class Vampiro implements Mostro {
         return vita;
     }
 
-    @Override
-    public void setVita(int vita) {
-
-        this.vita = vita;
-    }
 
     public void setGiocatore(boolean giocatore) {
         isGiocatore = giocatore;
@@ -62,8 +57,8 @@ public class Vampiro implements Mostro {
     @Override
     public boolean scappare() {
         boolean isScappato = false;
-        System.out.println("Hai opportunità 50%/50% di scappare. \nIn entrambi i casi perdi 10 punti di vita\n Se scappi con successo ottieni 10 punti di forza");
-        System.out.println("Inserisci la scelta: 1 -> Scappare | 2 -> Non scappare");
+        System.out.println("Hai opportunità 50%/50% di fuggire. \nIn entrambi i casi perdi 10 punti di vita\n Se riesci a fuggire ottieni 10 punti di forza");
+        System.out.println("Inserisci la scelta: 1 -> fuggire | 2 -> Non fuggire");
         Scanner sc = new Scanner(System.in);
         int scelta = sc.nextInt();
         switch (scelta) {
@@ -72,9 +67,6 @@ public class Vampiro implements Mostro {
                 isScappato = r.nextInt(2) == 0;
                 if (isScappato) {
                     forza += 10;
-                    System.out.println("Sei scappato!");
-                } else {
-                    System.out.println("Non sei riuscito a scapare");
                 }
                 break;
             case 2:

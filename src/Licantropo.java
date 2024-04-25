@@ -47,9 +47,6 @@ public class Licantropo implements Mostro, Umano {
         isGiocatore = giocatore;
     }
 
-    public void setVita(int vita) {
-        this.vita = vita;
-    }
 
     @Override
     public void attacca(Personaggio p) {
@@ -113,8 +110,8 @@ public class Licantropo implements Mostro, Umano {
     @Override
     public boolean scappare() {
         boolean isScappato = false;
-        System.out.println("Hai opportunità 50%/50% di scappare. \nIn entrambi i casi perdi 10 punti di vita\n Se scappi con successo ottieni 10 punti di forza");
-        System.out.println("Inserisci la scelta: 1 -> Scappare | 2 -> Non scappare");
+        System.out.println("Hai opportunità 50%/50% di fuggire. \nIn entrambi i casi perdi 10 punti di vita\n Se riesci a fuggire ottieni 10 punti di forza");
+        System.out.println("Inserisci la scelta: 1 -> fuggire | 2 -> Non fuggire");
         Scanner sc = new Scanner(System.in);
         int scelta = sc.nextInt();
         switch (scelta) {
@@ -123,9 +120,6 @@ public class Licantropo implements Mostro, Umano {
                 isScappato = r.nextInt(2) == 0;
                 if (isScappato) {
                     forza += 10;
-                    System.out.println("Hai scappato!");
-                } else {
-                    System.out.println("Non hai riuscito a scapare");
                 }
                 break;
             case 2:

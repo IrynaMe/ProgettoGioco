@@ -6,8 +6,6 @@ public interface Personaggio {
 
     int getVita();
 
-    void setVita(int vita);
-
     void attacca(Personaggio p);
 
     void riceviDanno(int danno);

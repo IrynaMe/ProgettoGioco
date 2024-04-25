@@ -8,10 +8,6 @@ public class Utilita {
     Personaggio avversario1;
     Personaggio avversario2;
 
-    public Personaggio getPersonaggioPrincipale() {
-        return giocatore;
-    }
-
     public Personaggio getAvversario1() {
         return avversario1;
     }
@@ -87,14 +83,14 @@ public class Utilita {
                 case 2:
                     if (giocatore.scappare()) {
                         System.out.println("Sei riuscito a fuggire!");
-                        return 1; // giocatore scappato, avversario ottiene vita=0->è conta come sconfitto
+                        return 1; // giocatore scappato, avversario ottiene vita=0-> conta come sconfitto
                     } else {
                         System.out.println("Non sei riuscito a fuggire!");
-                        break; // continua la battaglia
+                        break;
                     }
                 default:
                     System.out.println("Scelta non valida!");
-                    break; // continua la battaglia
+                    break;
             }
         } while (giocatore.getVita() > 0 && giocatore.getForza() > 0 && avversario.getVita() > 0 && avversario.getForza() > 0);
 
