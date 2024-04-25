@@ -1,4 +1,4 @@
 public interface Mostro extends Personaggio
 {
-    public void azzanna();
+  public void azzanna(Personaggio p);
 }

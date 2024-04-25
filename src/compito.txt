@@ -1,2 +1,0 @@
-danno deve dipendere dalla forza del personaggio
-scelta personaggi con Randon nextInt(int n);-in Main

@@ -1,62 +1,96 @@
 import java.util.Random;
+import java.util.Scanner;
 
 public class Eroe implements Umano {
-    Random x=new Random();
+    Random r = new Random();
     protected int forza;
-    protected int vite;
+    protected int vita;
+    protected boolean isGiocatore;
 
     public Eroe() {
-        forza = 10;
-        vite = 4;
-    }
-
-    public void combatti() {
-        if (forza > 0) {
-            forza-=x.nextInt(6)+5;
-            System.out.println("L'eroe attacca!");
-        } else {
-            vite-=1;
-            forza=10;
-            System.out.println("Non posso attacare");
-        }
-    }
-
-    @Override
-    public String stampaForza() {
-        return "Forza rimanente come eroe:" + forza;
+        this.forza = 10;
+        this.vita = 50;
     }
 
     public int getForza() {
-       return forza;
+        return forza;
     }
 
     @Override
     public int getVita() {
-        return vite;
+        return vita;
+    }
+
+    public void setVita(int vita) {
+        this.vita = vita;
+    }
+
+    public void setGiocatore(boolean giocatore) {
+        isGiocatore = giocatore;
     }
 
     @Override
     public void attacca(Personaggio p) {
-        if (vite>0){
-            p.ricevidanno(getForza());
+        if (vita > 0) {
+            combatti(p);
+        } else {
+            System.out.println("L'eroe non puo attacare");
+            forza = 0;
         }
-        combatti();
-    }
 
-
-    @Override
-    public void ricevidanno(int danno) {
-        forza -= danno;
-        if (forza < 0) {
-           nuovaVita();
-        }
     }
 
     @Override
-    public void nuovaVita() {
-        vite-=1;
-        forza=10;
-        System.out.println("le vite rimangono: "+vite);
+    public void combatti(Personaggio p) {
+        if (forza >= 2) {
+            System.out.println("L'eroe combatte!");
+            p.riceviDanno(getForza());
+            forza -= 2;
+            vita += 5;
+        } else {
+            forza = 0;
+        }
     }
 
+    @Override
+    public void riceviDanno(int danno) {
+        if (vita > 0) {
+            vita -= danno;
+        } else {
+            vita = 0;
+        }
+    }
+
+    @Override
+    public boolean scappare() {
+        boolean isScappato = false;
+        System.out.println("Hai opportunità 50%/50% di scappare. \nIn entrambi i casi perdi 10 punti di vita\n Se scappi con successo ottieni 10 punti di forza");
+        System.out.println("Inserisci la scelta: 1 -> Scappare | 2 -> Non scappare");
+        Scanner sc = new Scanner(System.in);
+        int scelta = sc.nextInt();
+        switch (scelta) {
+            case 1:
+                vita -= 10;
+                isScappato = r.nextInt(2) == 0;
+                if (isScappato) {
+                    forza += 10;
+                    System.out.println("Sei scappato!");
+                } else {
+                    System.out.println("Non sei riuscito a scappare");
+                }
+                break;
+            case 2:
+                isScappato = false;
+                break;
+            default:
+                System.out.println("Scelta errata");
+                break;
+        }
+        return isScappato;
+    }
+
+    @Override
+    public void stampaDati() {
+        System.out.println("Eroe ha forza: " + forza + " | vita: " + vita);
+    }
 }//

@@ -1,60 +1,93 @@
+import java.util.Random;
+import java.util.Scanner;
+
 public class Vampiro implements Mostro {
+    Random r = new Random();
     protected int forza;
-    protected int vite;
-    protected int protezione;//
+    protected int vita;
+    protected boolean isGiocatore;
 
     public Vampiro() {
-        forza = 10;
-        vite = 3;
-        protezione=5;
+        this.forza = 5;
+        this.vita = 70;
     }
 
-    public void azzanna() {
-        //prende forza quando azzanna
-        //quando forza finisce(=0)-> nuova vita + vita diminuisce
-        if (forza> 0) {
-            forza += 10;
-            System.out.println("Il vampiro attacca!");
-        } else{
-            nuovaVita();
-            System.out.println("Non posso attacare");
-        }
-    }
-
-    public String stampaForza() {
-        return "Forza rimanente come vampiro: " + forza;
-    }
-    public int getForza(){
+    public int getForza() {
         return forza;
     }
 
     @Override
     public int getVita() {
-       return vite;
+        return vita;
     }
+
+    @Override
+    public void setVita(int vita) {
+
+        this.vita = vita;
+    }
+
+    public void setGiocatore(boolean giocatore) {
+        isGiocatore = giocatore;
+    }
+
 
     @Override
     public void attacca(Personaggio p) {
-        if (vite>0){
-            p.ricevidanno(getForza());
-        }
-        azzanna();
-    }
-
-    @Override
-    public void ricevidanno(int danno) {
-        forza-=danno;
-        if (forza<0){
-           nuovaVita();
+        if (vita > 0) {
+            azzanna(p);
+        } else {
+            vita = 0;
+            System.out.println("Vampiro non può attacare");
         }
     }
 
-    @Override
-    public void nuovaVita() {
-        vite-=1;
-        forza=10;
-        System.out.println("le vite rimangono: "+vite);
+    public void azzanna(Personaggio p) {
+        System.out.println("Il vampiro azzanna!");
+        p.riceviDanno(getForza());
+        forza += 10;
     }
 
+    @Override
+    public void riceviDanno(int danno) {
+        if (vita > 0) {
+            vita -= danno;
+            forza -= danno / 3;
+        } else {
+            vita = 0;
+        }
 
-}
+    }
+
+    @Override
+    public boolean scappare() {
+        boolean isScappato = false;
+        System.out.println("Hai opportunità 50%/50% di scappare. \nIn entrambi i casi perdi 10 punti di vita\n Se scappi con successo ottieni 10 punti di forza");
+        System.out.println("Inserisci la scelta: 1 -> Scappare | 2 -> Non scappare");
+        Scanner sc = new Scanner(System.in);
+        int scelta = sc.nextInt();
+        switch (scelta) {
+            case 1:
+                vita -= 10;
+                isScappato = r.nextInt(2) == 0;
+                if (isScappato) {
+                    forza += 10;
+                    System.out.println("Sei scappato!");
+                } else {
+                    System.out.println("Non sei riuscito a scapare");
+                }
+                break;
+            case 2:
+                isScappato = false;
+                break;
+            default:
+                System.out.println("Scelta errata");
+                break;
+        }
+        return isScappato;
+    }
+
+    public void stampaDati() {
+        System.out.println("Vampiro ha forza: " + forza + " | vita: " + vita);
+    }
+}//
