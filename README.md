@@ -1,8 +1,8 @@
 Eroe:
- Forza iniziale: 10
- Vita iniziale: 50
- Combattimento: Dopo ogni attacco, la forza diminuisce e la vita aumenta.
- Non può attaccare se la vita è uguale o meno di 0.
+- Forza iniziale: 10
+- Vita iniziale: 50
+- Combattimento: Dopo ogni attacco, la forza diminuisce e la vita aumenta.
+- Non può attaccare se la vita è uguale o meno di 0.
 
 Vampiro:
 - Forza iniziale: 5
