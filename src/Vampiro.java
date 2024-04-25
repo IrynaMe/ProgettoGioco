@@ -51,7 +51,6 @@ public class Vampiro implements Mostro {
         } else {
             vita = 0;
         }
-
     }
 
     @Override

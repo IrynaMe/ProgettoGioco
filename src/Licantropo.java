@@ -101,7 +101,7 @@ public class Licantropo implements Mostro, Umano {
         }
         if (vita > 0) {
             vita -= danno;
-            if (!isUomo) forzaUmano -= danno / 3;
+            if (!isUomo) forzaMostro -= danno / 3;
         } else {
             vita = 0;
         }
