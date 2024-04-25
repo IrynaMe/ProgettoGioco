@@ -29,7 +29,7 @@ Fuga:
 - Ogni personaggio ha la possibilità del 50% di fuggire dalla battaglia quando la forza è uguale a 0.
 - L'esito della fuga è casuale.
 - Se tenta di fuggire, perde 10 punti di vita indipendentemente dall'esito della fuga.
--Se fugge con successo, ottiene 10 punti di forza; altrimenti, continua la battaglia.
+- Se fugge con successo, ottiene 10 punti di forza; altrimenti, continua la battaglia.
 
 ------
 
