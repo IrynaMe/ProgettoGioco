@@ -10,8 +10,8 @@ public class Utilita {
     Personaggio giocatore;
     Personaggio avversario1;
     Personaggio avversario2;
-    int durata = 0;
-    LocalDateTime localDateTime;
+    private int durata = 0;
+    private LocalDateTime localDateTime;
 
     public Personaggio getAvversario1() {
         return avversario1;
@@ -127,7 +127,7 @@ public class Utilita {
             switch (choice) {
                 case 1:
                     comincaAttaco(avversario);
-                    // aggiorno durata
+                    // aggiorno durata in ore
                     durata = r.nextInt(100) + 1;
                     break;
                 case 2:
