@@ -47,6 +47,9 @@ public class Licantropo implements Mostro, Umano {
         isGiocatore = giocatore;
     }
 
+    public void setUomo(boolean uomo) {
+        isUomo = uomo;
+    }
 
     @Override
     public void attacca(Personaggio p) {
@@ -134,9 +137,12 @@ public class Licantropo implements Mostro, Umano {
 
     @Override
     public void stampaDati() {
+
         if (isUomo) {
+            System.out.println("Licantropo è in forma di Uomo");
             System.out.println("Licantropo ha forza umana: " + forzaUmano + " | vita: " + vita);
         } else {
+            System.out.println("Licantropo è in forma di Mostro");
             System.out.println("Licantropo ha forza di mostro: " + forzaMostro + " | vita: " + vita);
         }
     }
