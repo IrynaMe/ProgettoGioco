@@ -60,7 +60,7 @@ public class Utilita {
         personaggi.add(new Eroe());
         personaggi.add(new Vampiro());
         personaggi.add(new Licantropo(prendiLuna(durata)));
-        // personaggi.add(new Licantropo(r.nextInt(2) == 0));
+        // personaggi.add(new Licantropo(r.nextInt(2) == 0));//old version
 
         Collections.shuffle(personaggi, r);
         giocatore = personaggi.get(0);
@@ -84,7 +84,7 @@ public class Utilita {
         System.out.println("2." + avversario2.getClass().getName());
     }
 
-    //schelta casuale chi attacca il primo, cambio turni sucessivamente
+    //aggiorna Stato Licantropo+schelta casuale chi attacca il primo, cambio turni sucessivamente
     public void comincaAttaco(Personaggio avversario) {
         //aggiorno isUomo di Licantropo prima di nuovo attaco
         if (giocatore instanceof Licantropo) {
@@ -127,7 +127,7 @@ public class Utilita {
             switch (choice) {
                 case 1:
                     comincaAttaco(avversario);
-                    // cambio durata
+                    // aggiorno durata
                     durata = r.nextInt(100) + 1;
                     break;
                 case 2:
