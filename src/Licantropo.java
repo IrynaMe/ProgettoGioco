@@ -10,7 +10,7 @@ public class Licantropo implements Mostro, Umano {
 
     public Licantropo(boolean luna) {
         this.isUomo = !luna;
-        this.vita = 80;
+        this.vita = 70;
         if (luna) {
             this.forzaMostro = 10;
             this.forzaUmano = 5;
@@ -139,10 +139,10 @@ public class Licantropo implements Mostro, Umano {
     public void stampaDati() {
 
         if (isUomo) {
-            System.out.println("Licantropo è in forma di Uomo");
+           // System.out.println("Licantropo è in forma di Uomo");
             System.out.println("Licantropo ha forza umana: " + forzaUmano + " | vita: " + vita);
         } else {
-            System.out.println("Licantropo è in forma di Mostro");
+           // System.out.println("Licantropo è in forma di Mostro");
             System.out.println("Licantropo ha forza di mostro: " + forzaMostro + " | vita: " + vita);
         }
     }

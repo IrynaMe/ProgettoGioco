@@ -1,6 +1,4 @@
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.*;
 
 public class Utilita {
@@ -50,10 +48,10 @@ public class Utilita {
 
     public boolean prendiLuna(int durata) {
         localDateTime = LocalDateTime.now().plusHours(durata);
-        boolean isNotte = localDateTime.getHour() <= 6||localDateTime.getHour() >= 21;
+        boolean isNotte = localDateTime.getHour() <= 7||localDateTime.getHour() >= 20;
 
         int moonPhase = moonPhase(localDateTime.getYear(), localDateTime.getMonthValue(), localDateTime.getDayOfMonth());
-        return isNotte && (moonPhase == 4);
+        return isNotte && (moonPhase >=3&&moonPhase<=5);
     }
 
     public void creaPersonaggi() {
@@ -69,29 +67,27 @@ public class Utilita {
         giocatore.setGiocatore(true);
         avversario1.setGiocatore(false);
         avversario2.setGiocatore(false);
-
     }
 
     public void stampaIntroduzione() {
         System.out.println("Il tuo personaggio è: " + giocatore.getClass().getName());
         if (giocatore instanceof Licantropo && ((Licantropo) giocatore).isUomo()) {
             System.out.println("Licantropo è in forma di Uomo");
-        } else {
+        } else if(giocatore instanceof Licantropo && !((Licantropo) giocatore).isUomo()){
             System.out.println("Licantropo è in forma di Mostro");
         }
         System.out.println("Per vincere gioco devi combatere con: ");
         System.out.println("1." + avversario1.getClass().getName());
         System.out.println("2." + avversario2.getClass().getName());
     }
-
     //aggiorna Stato Licantropo+schelta casuale chi attacca il primo, cambio turni sucessivamente
     public void comincaAttaco(Personaggio avversario) {
         //aggiorno isUomo di Licantropo prima di nuovo attaco
         if (giocatore instanceof Licantropo) {
-            ((Licantropo) giocatore).setUomo(prendiLuna(durata));
+            ((Licantropo) giocatore).setUomo(!prendiLuna(durata));
         }
         if (avversario instanceof Licantropo) {
-            ((Licantropo) avversario).setUomo(prendiLuna(durata));
+            ((Licantropo) avversario).setUomo(!prendiLuna(durata));
         }
         //aggiorno chi attaca
         if (isAttaccante) {
