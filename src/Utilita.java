@@ -10,8 +10,8 @@ public class Utilita {
     Personaggio giocatore;
     Personaggio avversario1;
     Personaggio avversario2;
-
     int durata = 0;
+    LocalDateTime localDateTime;
 
     public Personaggio getAvversario1() {
         return avversario1;
@@ -19,36 +19,6 @@ public class Utilita {
 
     public Personaggio getAvversario2() {
         return avversario2;
-    }
-
-
-    public boolean prendiLuna(int durata) {
-        LocalDateTime localDateTime = LocalDateTime.now().plusHours(durata);
-        boolean isNotte = localDateTime.getHour() > 0 && localDateTime.getHour() < 6;
-
-        int moonPhase = moonPhase(localDateTime.getYear(), localDateTime.getMonthValue(), localDateTime.getDayOfYear());
-        return isNotte && (moonPhase == 4);
-    }
-
-//  public static LocalDate getLocalDate() {return LocalDate.now();}
-
-    public void creaPersonaggi() {
-
-
-        personaggi.add(new Eroe());
-        personaggi.add(new Vampiro());
-
-        personaggi.add(new Licantropo(prendiLuna(durata)));
-        // personaggi.add(new Licantropo(r.nextInt(2) == 0));
-
-        Collections.shuffle(personaggi, r);
-        giocatore = personaggi.get(0);
-        avversario1 = personaggi.get(1);
-        avversario2 = personaggi.get(2);
-        giocatore.setGiocatore(true);
-        avversario1.setGiocatore(false);
-        avversario2.setGiocatore(false);
-
     }
 
     public int moonPhase(int year, int month, int day) {
@@ -78,6 +48,30 @@ public class Utilita {
         return ((((e + day) * 6 + 11) % 177) / 22 & 7);
     }
 
+    public boolean prendiLuna(int durata) {
+        localDateTime = LocalDateTime.now().plusHours(durata);
+        boolean isNotte = localDateTime.getHour() <= 6||localDateTime.getHour() >= 21;
+
+        int moonPhase = moonPhase(localDateTime.getYear(), localDateTime.getMonthValue(), localDateTime.getDayOfMonth());
+        return isNotte && (moonPhase == 4);
+    }
+
+    public void creaPersonaggi() {
+        personaggi.add(new Eroe());
+        personaggi.add(new Vampiro());
+        personaggi.add(new Licantropo(prendiLuna(durata)));
+        // personaggi.add(new Licantropo(r.nextInt(2) == 0));
+
+        Collections.shuffle(personaggi, r);
+        giocatore = personaggi.get(0);
+        avversario1 = personaggi.get(1);
+        avversario2 = personaggi.get(2);
+        giocatore.setGiocatore(true);
+        avversario1.setGiocatore(false);
+        avversario2.setGiocatore(false);
+
+    }
+
     public void stampaIntroduzione() {
         System.out.println("Il tuo personaggio è: " + giocatore.getClass().getName());
         if (giocatore instanceof Licantropo && ((Licantropo) giocatore).isUomo()) {
@@ -93,14 +87,12 @@ public class Utilita {
     //schelta casuale chi attacca il primo, cambio turni sucessivamente
     public void comincaAttaco(Personaggio avversario) {
         //aggiorno isUomo di Licantropo prima di nuovo attaco
-        boolean isLunaPiena=prendiLuna(durata);
         if (giocatore instanceof Licantropo) {
-            ((Licantropo) giocatore).setUomo(isLunaPiena);
+            ((Licantropo) giocatore).setUomo(prendiLuna(durata));
         }
         if (avversario instanceof Licantropo) {
-            ((Licantropo) avversario).setUomo(isLunaPiena);
+            ((Licantropo) avversario).setUomo(prendiLuna(durata));
         }
-
         //aggiorno chi attaca
         if (isAttaccante) {
             giocatore.attacca(avversario);
@@ -110,14 +102,11 @@ public class Utilita {
         isAttaccante = !isAttaccante;
     }
 
-
     //return 1 se vinto 0 se perso
     public int combattere(Personaggio avversario) {
         int result = -1;
         Scanner scanner = new Scanner(System.in);
-        LocalTime localtime = LocalTime.now().plusHours(durata);
-
-
+       // localDateTime = LocalDateTime.now().plusHours(durata);
         do {
             System.out.println("Stato del tuo personaggio: ");
             giocatore.stampaDati();
